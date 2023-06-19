@@ -10,6 +10,7 @@
     "@emotion/css": "^11.11.0",
     "@headlessui/react": "^1.7.14",
     "@material-tailwind/react": "^2.0.1",
+    "@syncfusion/ej2-react-documenteditor": "21.2.10",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",

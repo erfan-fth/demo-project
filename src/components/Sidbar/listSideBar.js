@@ -13,6 +13,7 @@ import Report from "../Report/Report";
 import Form_Five from "../forms/Form_Five";
 import Form_Six from "../forms/Form_Six";
 import Form_Seven from "../forms/Form_Seven";
+import Form_Eight from "../forms/Form_Eight";
 
 export const sideBars = [
   {
@@ -90,6 +91,15 @@ export const sideBars = [
           label: "جدول سه",
           children: <Form_Seven />,
           key: "8",
+        },
+      },
+      {
+        id: 9,
+        name: "word",
+        component: {
+          label: "word",
+          children: <Form_Eight />,
+          key: "9",
         },
       },
     ],
