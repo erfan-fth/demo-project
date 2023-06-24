@@ -14,6 +14,36 @@ import ReactDragListView from "react-drag-listview";
 import { Select } from "antd";
 import MultiSelect from "../Select/multiSelect";
 import { Excel } from "antd-table-saveas-excel";
+import _ from "lodash";
+import { Resizable } from "react-resizable";
+
+const ResizableTitle = (props) => {
+  const { onResize, width, ...restProps } = props;
+
+  if (!width) {
+    return <th {...restProps} />;
+  }
+
+  return (
+    <Resizable
+      width={width}
+      height={0}
+      resizeHandles={["w"]}
+      handle={
+        <span
+          className="react-resizable-handle"
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+        />
+      }
+      onResize={onResize}
+      draggableOpts={{ enableUserSelectHack: false }}
+    >
+      <th {...restProps} />
+    </Resizable>
+  );
+};
 
 const EditableContext = React.createContext(null);
 
@@ -78,7 +108,16 @@ const EditableCell = ({
           },
         ]}
       >
-        <Input ref={inputRef} onPressEnter={save} onBlur={save} />
+        {dataIndex == "gender" ? (
+          <Select
+            ref={inputRef}
+            onPressEnter={save}
+            onBlur={save}
+            options={genderOptions}
+          />
+        ) : (
+          <Input ref={inputRef} onPressEnter={save} onBlur={save} />
+        )}
       </Form.Item>
     ) : (
       <div
@@ -151,8 +190,9 @@ const Form_Five = ({ children, ...props }) => {
           ref={searchInput}
           placeholder={`Search ${dataIndex}`}
           value={selectedKeys[0]}
-          onChange={(e) =>
-            setSelectedKeys(e.target.value ? [e.target.value] : [])
+          onChange={
+            (e) => setSelectedKeys(e.target.value ? [e.target.value] : [])
+            // console.log(selectedKeys, confirm, dataIndex)
           }
           onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
           style={{
@@ -393,6 +433,7 @@ const Form_Five = ({ children, ...props }) => {
         );
       },
       dataIndex: "name",
+      width: 30,
       key: "name",
       editable: true,
       hidden: false,
@@ -402,6 +443,7 @@ const Form_Five = ({ children, ...props }) => {
       dataIndex: "family",
       key: "family",
       editable: true,
+      width: 40,
       sorter: {
         compare: (a, b) => a.family - b.family,
         multiple: 3,
@@ -426,12 +468,13 @@ const Form_Five = ({ children, ...props }) => {
         );
       },
       // width: "30%",
-      // ...getColumnSearchProps("family"),
+      ...getColumnSearchProps("family"),
       hidden: false,
     },
     {
       title: "جنسیت",
       dataIndex: "gender",
+      width: 20,
       key: "gender",
       editable: true,
 
@@ -439,7 +482,7 @@ const Form_Five = ({ children, ...props }) => {
         compare: (a, b) => a.gender - b.gender,
         multiple: 2,
       },
-      // ...getColumnSelectSearchProps("gender"),
+      ...getColumnSelectSearchProps("gender"),
       render: (gender, item) => {
         const index = item.key;
         return (
@@ -451,6 +494,7 @@ const Form_Five = ({ children, ...props }) => {
                   width: "90%",
                 }}
                 placeholder="Select a gender"
+                
                 optionFilterProp="children"
                 // onChange={(e) => handle_change_gender(e, index)}
                 // onSearch={onSearch}
@@ -465,25 +509,28 @@ const Form_Five = ({ children, ...props }) => {
                   { label: "زن", value: "woman" },
                 ]}
               />
+            ) : gender == "man" ? (
+              "مرد"
             ) : (
-              gender
-              // <Select
-              //   value={gender}
-              //   style={{
-              //     width: "90%",
-              //   }}
-              //   placeholder="Select a person"
-              //   optionFilterProp="children"
-              //   onChange={(e) => handle_change_gender(e, index)}
-              //   onSearch={onSearch}
-              //   filterOption={(input, option) =>
-              //     (option?.label ?? "")
-              //       .toLowerCase()
-              //       .includes(input.toLowerCase())
-              //   }
-              //   options={genderOptions}
-              // />
-            )}
+              "زن"
+            )
+            // <Select
+            //   value={gender}
+            //   style={{
+            //     width: "90%",
+            //   }}
+            //   placeholder="Select a person"
+            //   optionFilterProp="children"
+            //   onChange={(e) => handle_change_gender(e, index)}
+            //   onSearch={onSearch}
+            //   filterOption={(input, option) =>
+            //     (option?.label ?? "")
+            //       .toLowerCase()
+            //       .includes(input.toLowerCase())
+            //   }
+            //   options={genderOptions}
+            // />
+            }
           </span>
         );
       },
@@ -493,6 +540,7 @@ const Form_Five = ({ children, ...props }) => {
     {
       title: "ارز",
       dataIndex: "currency",
+      width: 40,
       key: "currency",
       editable: true,
       render: (record) => {
@@ -520,12 +568,13 @@ const Form_Five = ({ children, ...props }) => {
         multiple: 1,
       },
       // width: "30%",
-      // ...getColumnSearchProps("currency"),
+      ...getColumnSearchProps("currency"),
       hidden: false,
     },
     {
       title: "نرخ ارز",
       dataIndex: "currency2",
+      width: 40,
       key: "currency2",
       render: (record) => {
         // console.log(record);
@@ -553,12 +602,13 @@ const Form_Five = ({ children, ...props }) => {
         multiple: 1,
       },
       // width: "30%",
-      // ...getColumnSearchProps("currency2"),
+      ...getColumnSearchProps("currency2"),
       hidden: false,
     },
     {
       title: "نرخ ارز",
       dataIndex: "tax",
+      width: 40,
       key: "tax",
       render: (record) => {
         return (
@@ -585,12 +635,13 @@ const Form_Five = ({ children, ...props }) => {
         multiple: 1,
       },
       // width: "30%",
-      // ...getColumnSearchProps("tax"),
+      ...getColumnSearchProps("tax"),
       hidden: false,
     },
     {
       title: "operation",
       dataIndex: "operation",
+      width: 40,
       render: (_, record) =>
         dataSource.length >= 1 ? (
           <Popconfirm
@@ -784,7 +835,47 @@ const Form_Five = ({ children, ...props }) => {
       }),
     };
   });
+
   let column = showColumns(new_columns);
+
+  const handleResize =
+    (index) =>
+    (e, { size }) => {
+      setColumns((prevColumns) => {
+        const nextColumns = [...prevColumns];
+        nextColumns[index] = {
+          ...nextColumns[index],
+          width: size.width,
+        };
+        return nextColumns;
+      });
+    };
+
+  const columnsWithResizeHandlers = columns.map((col, index) => ({
+    ...col,
+    onHeaderCell: (column) => ({
+      width: column.width,
+      onResize: handleResize(index),
+    }),
+  }));
+
+  const handleSearchColumn = (record, value) => {
+    const searchData = record["dataIndex"]
+      .toString()
+      .toLowerCase()
+      .includes(value.toLowerCase());
+
+    console.log(searchData);
+    // console.log(dataSource.find(i => i.dataIndex == dataIndex))
+
+    // let filteredData = dataSource.filter(item => item.family === value);
+    // console.log(filteredData)
+    // dataSource.forEach((item) => {
+    //   const keys = Object.keys(item);
+    //   console.log(keys);
+    // });
+  };
+
   return (
     <Form>
       <div className="flex justify-between  ">
@@ -821,6 +912,9 @@ const Form_Five = ({ children, ...props }) => {
           <ReactDragListView.DragColumn {...dragProps}>
             <Table
               components={{
+                // header: {
+                //   cell: ResizableTitle,
+                // },
                 body: {
                   row: EditableRow,
                   cell: EditableCell,
@@ -830,37 +924,36 @@ const Form_Five = ({ children, ...props }) => {
               bordered
               size={size}
               rowKey="key"
+              // columns={showColumns(columnsWithResizeHandlers)}
               columns={showColumns(new_columns)}
               dataSource={dataSource}
-              summary={() => (
-                <Table.Summary fixed="top">
-                  <Table.Summary.Row>
-                    {column.map((item) => {
-                      return (
-                        item.title !== "operation" && (
-                          <Table.Summary.Cell>
-                            <Input
-                              // style={{ width: 200 }}
-                              size="small"
-                              className="w-full p-1 bg-white border border-gray-200"
-                              placeholder={`جستجو ${item.title}`}
-                              // allowClear
-                              // enterButton="Search"
-                              onChange={() =>
-                                getColumnSearchProps(item.dataIndex)
-                              }
-                              onSearch={(value) =>
-                                getColumnSearchProps(item.dataIndex)
-                              }
-                            />
-                          </Table.Summary.Cell>
-                        )
-                      );
-                    })}
-                  </Table.Summary.Row>
-                </Table.Summary>
-              )}
-              sticky
+              // summary={() => (
+              //   <Table.Summary fixed="top">
+              //     <Table.Summary.Row>
+              //       {column.map((item) => {
+              //         return (
+              //           item.title !== "operation" && (
+              //             <Table.Summary.Cell>
+              //               <Input
+              //                 // style={{ width: 200 }}
+              //                 size="small"
+              //                 className="w-full p-1 bg-white border border-gray-200"
+              //                 placeholder={`جستجو ${item.title}`}
+              //                 // allowClear
+              //                 // enterButton="Search"
+              //                 onChange={
+              //                   (e) => getColumnSearchProps(item.dataIndex)
+              //                   // handleSearchColumn(item, e.target.value)
+              //                 }
+              //               />
+              //             </Table.Summary.Cell>
+              //           )
+              //         );
+              //       })}
+              //     </Table.Summary.Row>
+              //   </Table.Summary>
+              // )}
+              // sticky
             />
           </ReactDragListView.DragColumn>
         </SortableContext>

@@ -11,7 +11,7 @@ const MultiSelect = ({ listItem, handleChange }) => {
         width: "100%",
       }}
       placeholder="select one country"
-     
+      allowClear
       onChange={handleChange}
       optionLabelProp="label"
     >
