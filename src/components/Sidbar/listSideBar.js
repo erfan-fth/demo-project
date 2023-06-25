@@ -14,6 +14,8 @@ import Form_Five from "../forms/Form_Five";
 import Form_Six from "../forms/Form_Six";
 import Form_Seven from "../forms/Form_Seven";
 import Toasts_Page from "../forms/Toasts_Page";
+import Form_Eight from "../forms/Form_Eigth";
+import Form_Nine from "../forms/Form_Nine";
 
 export const sideBars = [
   {
@@ -100,6 +102,24 @@ export const sideBars = [
           label: "اعلانات",
           children: <Toasts_Page />,
           key: "9",
+        },
+      },
+      {
+        id: 10,
+        name: "word",
+        component: {
+          label: "word",
+          children: <Form_Eight />,
+          key: "10",
+        },
+      },
+      {
+        id: 11,
+        name: "newTable",
+        component: {
+          label: "newTable",
+          children: <Form_Nine />,
+          key: "11",
         },
       },
     ],
