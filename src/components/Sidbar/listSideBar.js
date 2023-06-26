@@ -16,6 +16,7 @@ import Form_Seven from "../forms/Form_Seven";
 import Toasts_Page from "../forms/Toasts_Page";
 import Form_Eight from "../forms/Form_Eigth";
 import Form_Nine from "../forms/Form_Nine";
+import Form_Ten from "../forms/Form_Ten";
 
 export const sideBars = [
   {
@@ -119,6 +120,15 @@ export const sideBars = [
         component: {
           label: "newTable",
           children: <Form_Nine />,
+          key: "11",
+        },
+      },
+      {
+        id: 11,
+        name: "data-grid",
+        component: {
+          label: "data-grid",
+          children: <Form_Ten />,
           key: "11",
         },
       },
