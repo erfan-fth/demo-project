@@ -6,7 +6,10 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-enterprise";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
+import { fakeData } from "./fackData";
 
+
+const colors = ['Red', 'Green', 'Blue'];
 const Form_Ten = () => {
   const gridRef = useRef();
   const containerStyle = useMemo(() => ({ width: "1000", height: 600 }), []);
@@ -14,12 +17,41 @@ const Form_Ten = () => {
   const [rowData, setRowData] = useState();
   const [columnDefs, setColumnDefs] = useState([
     // set filters
-    { field: "athlete", filter: "agTextColumnFilter" },
-    { field: "country", filter: "agTextColumnFilter" },
+    {
+      headerName: "ورزش",
+      field: "athlete",
+      filter: "agTextColumnFilter",
+      cellEditorPopup: true,
+      cellEditor: "agLargeTextCellEditor",
+      cellEditorParams: {
+        maxLength: 250,
+        rows: 10,
+        cols: 50,
+      },
+      flex: 2,
+    },
+    { headerName: "کشور", field: "country", filter: "agTextColumnFilter" ,
+  },
     // number filters
-    { field: "gold", filter: "agNumberColumnFilter" },
-    { field: "silver", filter: "agNumberColumnFilter" },
-    { field: "bronze", filter: "agNumberColumnFilter" },
+    { headerName: "طلا", field: "gold", filter: "agNumberColumnFilter" },
+    { headerName: "نقره", field: "silver", filter: "agNumberColumnFilter" },
+    {
+      headerName: "برنز",
+      field: "bronze",
+      filter: "agNumberColumnFilter",
+    },
+
+    {
+      headerName: 'رنگ',
+      field: 'color',
+      filter:'agSetColumnFilter',
+      // cellRenderer: ColourCellRenderer,
+      defaultColDef:'Red',
+      cellEditor: 'agSelectCellEditor',
+      cellEditorParams: {
+        values: colors,
+      },
+    },
   ]);
   const defaultColDef = useMemo(() => {
     return {
@@ -34,9 +66,11 @@ const Form_Ten = () => {
   }, []);
 
   const onGridReady = useCallback((params) => {
-    fetch("https://www.ag-grid.com/example-assets/olympic-winners.json")
-      .then((resp) => resp.json())
-      .then((data) => setRowData(data));
+    // fetch("https://www.ag-grid.com/example-assets/olympic-winners.json")
+    //   .then((resp) => resp.json())
+    //   .then((data) => setRowData(data));
+
+      setRowData(fakeData)
   }, []);
 
   const onFirstDataRendered = useCallback((params) => {
@@ -71,7 +105,7 @@ const Form_Ten = () => {
           columnDefs={columnDefs}
           defaultColDef={defaultColDef}
           onGridReady={onGridReady}
-        //   onFirstDataRendered={onFirstDataRendered}
+          //   onFirstDataRendered={onFirstDataRendered}
         ></AgGridReact>
       </div>
     </div>
