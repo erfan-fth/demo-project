@@ -7,6 +7,7 @@ import "ag-grid-enterprise";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import { fakeData } from "./fackData";
+import Data_Grid from "../Tables/Data_Grid";
 
 
 const colors = ['Red', 'Green', 'Blue'];
@@ -30,8 +31,9 @@ const Form_Ten = () => {
       },
       flex: 2,
     },
-    { headerName: "کشور", field: "country", filter: "agTextColumnFilter" ,
-  },
+    {
+      headerName: "کشور", field: "country", filter: "agTextColumnFilter",
+    },
     // number filters
     { headerName: "طلا", field: "gold", filter: "agNumberColumnFilter" },
     { headerName: "نقره", field: "silver", filter: "agNumberColumnFilter" },
@@ -44,9 +46,9 @@ const Form_Ten = () => {
     {
       headerName: 'رنگ',
       field: 'color',
-      filter:'agSetColumnFilter',
+      filter: 'agSetColumnFilter',
       // cellRenderer: ColourCellRenderer,
-      defaultColDef:'Red',
+      defaultColDef: 'Red',
       cellEditor: 'agSelectCellEditor',
       cellEditorParams: {
         values: colors,
@@ -70,7 +72,7 @@ const Form_Ten = () => {
     //   .then((resp) => resp.json())
     //   .then((data) => setRowData(data));
 
-      setRowData(fakeData)
+    setRowData(fakeData)
   }, []);
 
   const onFirstDataRendered = useCallback((params) => {
@@ -83,32 +85,35 @@ const Form_Ten = () => {
   }, []);
 
   return (
-    <div style={containerStyle}>
-      {/* <div className="example-header">
-        Page Size:
-        <select onChange={onPageSizeChanged} id="page-size">
-          <option value="10">10</option>
-          <option value="100">100</option>
-          <option value="500">500</option>
-          <option value="1000">1000</option>
-        </select>
-      </div> */}
-      <div style={gridStyle} className="ag-theme-alpine">
-        <AgGridReact
-          sideBar={true}
-          enableRtl={true}
-          pagination={true}
-          groupSelectsChildren={true}
-          rowSelection={"multiple"}
-          rowGroupPanelShow="always"
-          rowData={rowData}
-          columnDefs={columnDefs}
-          defaultColDef={defaultColDef}
-          onGridReady={onGridReady}
-          //   onFirstDataRendered={onFirstDataRendered}
-        ></AgGridReact>
-      </div>
-    </div>
+    <>
+      <Data_Grid fakeData={fakeData} columnDefs={columnDefs} gridStyle={gridStyle} />
+    </>
+    // <div style={containerStyle}>
+    //   {/* <div className="example-header">
+    //     Page Size:
+    //     <select onChange={onPageSizeChanged} id="page-size">
+    //       <option value="10">10</option>
+    //       <option value="100">100</option>
+    //       <option value="500">500</option>
+    //       <option value="1000">1000</option>
+    //     </select>
+    //   </div> */}
+    //   <div style={gridStyle} className="ag-theme-alpine">
+    //     <AgGridReact
+    //       sideBar={true}
+    //       enableRtl={true}
+    //       pagination={true}
+    //       groupSelectsChildren={true}
+    //       rowSelection={"multiple"}
+    //       rowGroupPanelShow="always"
+    //       rowData={rowData}
+    //       columnDefs={columnDefs}
+    //       defaultColDef={defaultColDef}
+    //       onGridReady={onGridReady}
+    //       //   onFirstDataRendered={onFirstDataRendered}
+    //     ></AgGridReact>
+    //   </div>
+    // </div>
   );
 };
 export default Form_Ten;
