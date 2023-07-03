@@ -10,12 +10,12 @@ import Form_Two from "../forms/Form_Two";
 import Form_Three from "../forms/Form_Three";
 import Form_Four from "../forms/Form_Four";
 import Report from "../Report/Report";
-import Form_Five from "../forms/Form_Five";
-import Form_Six from "../forms/Form_Six";
+// import Form_Five from "../forms/Form_Five";
+// import Form_Six from "../forms/Form_Six";
 import Form_Seven from "../forms/Form_Seven";
 import Toasts_Page from "../forms/Toasts_Page";
 import Form_Eight from "../forms/Form_Eigth";
-import Form_Nine from "../forms/Form_Nine";
+// import Form_Nine from "../forms/Form_Nine";
 import Form_Ten from "../forms/Form_Ten";
 
 export const sideBars = [
@@ -69,24 +69,24 @@ export const sideBars = [
           key: "5",
         },
       },
-      {
-        id: 6,
-        name: " جدول",
-        component: {
-          label: " جدول",
-          children: <Form_Five />,
-          key: "6",
-        },
-      },
-      {
-        id: 7,
-        name: "جدول دو",
-        component: {
-          label: "جدول دو",
-          children: <Form_Six />,
-          key: "7",
-        },
-      },
+      // {
+      //   id: 6,
+      //   name: " جدول",
+      //   component: {
+      //     label: " جدول",
+      //     children: <Form_Five />,
+      //     key: "6",
+      //   },
+      // },
+      // {
+      //   id: 7,
+      //   name: "جدول دو",
+      //   component: {
+      //     label: "جدول دو",
+      //     children: <Form_Six />,
+      //     key: "7",
+      //   },
+      // },
       {
         id: 8,
         name: "جدول سه",
@@ -114,15 +114,15 @@ export const sideBars = [
           key: "10",
         },
       },
-      {
-        id: 11,
-        name: "newTable",
-        component: {
-          label: "newTable",
-          children: <Form_Nine />,
-          key: "11",
-        },
-      },
+      // {
+      //   id: 11,
+      //   name: "newTable",
+      //   component: {
+      //     label: "newTable",
+      //     children: <Form_Nine />,
+      //     key: "11",
+      //   },
+      // },
       {
         id: 11,
         name: "data-grid",
