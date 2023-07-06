@@ -1,5 +1,5 @@
 import React from "react";
-import Layout_Tab from "../components/Tabs/Layout_Tab";
+import Layout_Tab from "../components/common/Tabs/Layout_Tab";
 
 const Home = () => {
   return (

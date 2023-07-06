@@ -9,7 +9,7 @@ import Form_One from "../forms/Form_One";
 import Form_Two from "../forms/Form_Two";
 import Form_Three from "../forms/Form_Three";
 import Form_Four from "../forms/Form_Four";
-import Report from "../Report/Report";
+import Report from "../common/Report/Report";
 // import Form_Five from "../forms/Form_Five";
 // import Form_Six from "../forms/Form_Six";
 import Form_Seven from "../forms/Form_Seven";
@@ -105,15 +105,15 @@ export const sideBars = [
           key: "9",
         },
       },
-      {
-        id: 10,
-        name: "word",
-        component: {
-          label: "word",
-          children: <Form_Eight />,
-          key: "10",
-        },
-      },
+      // {
+      //   id: 10,
+      //   name: "word",
+      //   component: {
+      //     label: "word",
+      //     children: <Form_Eight />,
+      //     key: "10",
+      //   },
+      // },
       // {
       //   id: 11,
       //   name: "newTable",

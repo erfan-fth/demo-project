@@ -9,7 +9,7 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { css } from "@emotion/css"
-import { useTabs, useTabsAction } from "../../context/TabProviders";
+import { useTabs, useTabsAction } from "../../../context/TabProviders";
 
 
 
